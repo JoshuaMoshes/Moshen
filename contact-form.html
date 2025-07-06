@@ -131,12 +131,12 @@
       <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
     </div>
 
-    <!-- ***** MAIN FORM – no JavaScript interception ***** -->
-    <form action="https://formsubmit.co/joshua.moshes@moshen.app" method="POST">
-      <!-- FormSubmit config -->
-      <input type="hidden" name="_next" value="https://moshen.app/contact-form.html" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
+    <!-- ***** MAIN FORM - Web3Forms ***** -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <!-- required -->
+      <input type="hidden" name="access_key" value="4a89e690-6657-4bf2-8f33-2db376f7ae75">
+      <!-- optional - send user back to your page after submit -->
+      <input type="hidden" name="redirect" value="https://moshen.app/contact-form.html">
 
       <div class="form-row">
         <div class="form-group">
@@ -178,7 +178,7 @@
     </form>
 
     <div class="form-footer">
-      <p>We typically respond within 24 hours. For urgent matters, please email us directly at <strong>joshua.moshes@moshen.app</strong></p>
+      <p>We typically respond within 24 hours. For urgent matters, please email us directly at <strong>joshua.moshes@moshen.com</strong></p>
     </div>
   </div>
 </body>
