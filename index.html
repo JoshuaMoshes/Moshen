@@ -96,23 +96,6 @@
             outline: 2px solid var(--accent);
         }
 
-        .logo:hover::after {
-            transform: scaleX(1);
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            transform-origin: left;
-            background: linear-gradient(90deg, #5856D6, var(--accent));
-            transform: scaleX(0);
-            transition: transform .3s ease;
-        }
-
         .logo-text {
             font-weight: 300;
             letter-spacing: -0.03em;
@@ -290,7 +273,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            /* align-items: center; */
             z-index: 1;
             position: relative;
         }
@@ -654,6 +637,208 @@
             line-height: 1.7;
         }
 
+        /* Contact Form Section */
+        .contact-section {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(20, 26, 61, 0.8) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(107, 99, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-header p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(107, 99, 255, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--surface-light);
+            color: var(--text);
+        }
+
+        .required {
+            color: var(--accent-light);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+            padding-top: 1.25rem;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(107, 99, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(107, 99, 255, 0.5);
+            opacity: 0.9;
+        }
+
+        .submit-btn:hover::before {
+            opacity: 1;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-footer p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .form-footer strong {
+            color: var(--accent-light);
+        }
+
+        /* Responsive Design for Contact Form */
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 4rem 5%;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+            
+            .form-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .form-header p {
+                font-size: 1.1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .submit-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+
         /* Enhanced Footer */
         footer {
             padding: 3rem 5%;
@@ -733,6 +918,30 @@
                 font-size: 2.5rem;
             }
         }
+
+        /* Contact Form Spacing Fixes */
+        
+        /* 1. Give every standalone .form-group a bottom margin
+              so the e-mail, subject and message blocks stay evenly spaced */
+        form .form-group:not(:last-of-type) {
+            margin-bottom: 2rem;          /* was missing */
+        }
+
+        /* 2. On larger screens tighten the two-column row a hair
+              and let the single-column groups breathe */
+        @media (min-width: 769px) {
+            .form-row { gap: 1.5rem; }    /* down from 2rem */
+            form .form-group:not(:last-of-type) {
+                margin-bottom: 1.5rem;    /* adds a touch more vertical air */
+            }
+        }
+
+        /* 3. Keep the button from sticking to the last field on mobile */
+        @media (max-width: 768px) {
+            .submit-btn {
+                margin-top: 1.5rem;       /* creates clear separation */
+            }
+        }
     </style>
 </head>
 <body>
@@ -754,6 +963,7 @@
                 <li><a href="index#features">Features</a></li>
                 <li><a href="index#stats">Stats</a></li>
                 <li><a href="index#download">Download</a></li>
+                <li><a href="index#contact">Contact</a></li>
                 <li><a href="index#download" class="get-started">Get started</a></li>
             </ul>
         </div>
@@ -861,6 +1071,66 @@
         </div>
     </section>
 
+    <!-- Contact Form Section -->
+    <section class="contact-section scroll-fade" id="contact">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Get In Touch</h1>
+                <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <!-- ***** MAIN FORM - Web3Forms ***** -->
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <!-- required -->
+                <input type="hidden" name="access_key" value="4a89e690-6657-4bf2-8f33-2db376f7ae75">
+                <!-- optional - send user back to your page after submit -->
+                <input type="hidden" name="redirect" value="https://moshen.app/index.html">
+
+                <div class="form-row" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="First Name" placeholder="John" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="Last Name" placeholder="Doe" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="Email" placeholder="john@example.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject <span class="required">*</span></label>
+                    <select id="subject" name="Subject" required>
+                        <option value="">Select a topic</option>
+                        <option>General Question</option>
+                        <option>Feature Request</option>
+                        <option>Bug Report</option>
+                        <option>Partnership</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label for="message">Message <span class="required">*</span></label>
+                    <textarea id="message" name="Message" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+
+            <div class="form-footer">
+                <p>We typically respond within 24 hours.
+					<br>
+					For urgent matters, please email us directly at <a target="_blank" href="mailto:joshua.moshes@moshen.app" style="text-decoration: none;"><strong>joshua.moshes@moshen.app</strong></a></p>
+            </div>
+        </div>
+    </section>
+
     <!-- Enhanced Footer -->
     <footer>
         <p>&copy; 2025 Moshen. All rights reserved. <a href="privacy-policy">Privacy Policy</a> • <a href="terms-of-service">Terms of Service</a> • <a href="#">Contact Us</a></p>
@@ -959,6 +1229,7 @@
             el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             featureObserver.observe(el);
         });
+
     </script>
 </body>
 </html>
