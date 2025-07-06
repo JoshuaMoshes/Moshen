@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Form - Moshen</title>
+
+  <style>
+    /* ---------- Base reset ---------- */
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --background:#0a0d26;
+      --surface-light:#1f274a;
+      --accent:#6b63ff;
+      --accent-light:#8c84ff;
+      --success:#00d9b8;
+      --text:#ffffff;
+      --text-secondary:rgba(255,255,255,.7);
+      --text-tertiary:rgba(255,255,255,.5)
+    }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      background:radial-gradient(ellipse at top right,rgba(107,99,255,.15)0%,transparent 50%),
+                 radial-gradient(ellipse at bottom left,rgba(0,217,184,.1)0%,transparent 50%),
+                 var(--background);
+      color:var(--text);
+      line-height:1.6;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem
+    }
+
+    /* ---------- Card ---------- */
+    .form-container{
+      background:rgba(255,255,255,.03);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:3rem;
+      width:100%;
+      max-width:600px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 25px 50px rgba(107,99,255,.1)
+    }
+    .form-container::before{
+      content:'';
+      position:absolute;
+      top:-50%;left:-50%;
+      width:200%;height:200%;
+      background:radial-gradient(circle,rgba(107,99,255,.05)0%,transparent 70%);
+      opacity:.5;
+      pointer-events:none
+    }
+
+    /* ---------- Head ---------- */
+    .form-header{text-align:center;margin-bottom:2.5rem;position:relative;z-index:1}
+    .form-header h1{
+      font-size:2.5rem;font-weight:900;margin-bottom:.5rem;
+      background:linear-gradient(135deg,var(--text),var(--accent-light));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text
+    }
+    .form-header p{color:var(--text-secondary);font-size:1.1rem}
+
+    /* ---------- Inputs ---------- */
+    .form-group{margin-bottom:1.5rem}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+    label{display:block;margin-bottom:.5rem;font-weight:600;color:var(--text);font-size:.95rem}
+
+    input[type=text],input[type=email],select,textarea{
+      width:100%;padding:1rem 1.25rem;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:12px;
+      color:var(--text);font-size:1rem;font-family:inherit;
+      transition:all .3s ease;backdrop-filter:blur(10px)
+    }
+    input[type=text]:focus,input[type=email]:focus,select:focus,textarea:focus{
+      outline:none;border-color:var(--accent);
+      background:rgba(255,255,255,.08);
+      box-shadow:0 0 0 3px rgba(107,99,255,.1)
+    }
+    input::placeholder,textarea::placeholder{color:var(--text-tertiary)}
+    textarea{resize:vertical;min-height:120px}
+    select{cursor:pointer}
+    select option{background:var(--surface-light);color:var(--text)}
+    .required{color:var(--accent-light)}
+
+    /* ---------- Button ---------- */
+    .submit-btn{
+      width:100%;padding:1.2rem 2rem;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      border:none;border-radius:12px;
+      color:#fff;font-size:1.1rem;font-weight:600;font-family:inherit;
+      cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);
+      position:relative;overflow:hidden;
+      box-shadow:0 10px 30px rgba(107,99,255,.3)
+    }
+    .submit-btn::before{
+      content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+      transition:left .5s ease
+    }
+    .submit-btn:hover::before{left:100%}
+    .submit-btn:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(107,99,255,.4)}
+    .submit-btn:active{transform:translateY(0)}
+
+    /* ---------- Footer ---------- */
+    .form-footer{text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+    .form-footer p{color:var(--text-tertiary);font-size:.9rem}
+
+    /* ---------- Responsive ---------- */
+    @media(max-width:768px){
+      .form-container{padding:2rem;margin:1rem}
+      .form-header h1{font-size:2rem}
+      .form-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-header">
+      <h1>Get In Touch</h1>
+      <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+    </div>
+
+    <!-- ***** MAIN FORM – no JavaScript interception ***** -->
+    <form action="https://formsubmit.co/joshuam6060@gmail.com" method="POST">
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_next" value="https://moshen.app/contact-form.html" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name <span class="required">*</span></label>
+          <input type="text" id="firstName" name="First Name" placeholder="John" required />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name <span class="required">*</span></label>
+          <input type="text" id="lastName" name="Last Name" placeholder="Doe" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" name="Email" placeholder="john@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject <span class="required">*</span></label>
+        <select id="subject" name="Subject" required>
+          <option value="">Select a topic</option>
+          <option>General Inquiry</option>
+          <option>Technical Support</option>
+          <option>Billing Question</option>
+          <option>Feature Request</option>
+          <option>Bug Report</option>
+          <option>Partnership</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message <span class="required">*</span></label>
+        <textarea id="message" name="Message" placeholder="Tell us how we can help you..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+
+    <div class="form-footer">
+      <p>We typically respond within 24 hours. For urgent matters, please email us directly at <strong>joshua.moshes@moshen.com</strong></p>
+    </div>
+  </div>
+</body>
+</html>
