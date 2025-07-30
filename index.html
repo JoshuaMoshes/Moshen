@@ -197,6 +197,8 @@
         @media(max-width:768px) {
             .menu-toggle {
                 display: block;
+                z-index: 1001;
+                position: relative;
             }
 
             .nav-links {
@@ -211,10 +213,41 @@
                 gap: 2rem;
                 background: var(--surface);
                 transition: right .3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
             }
 
             .nav-links a {
                 font-size: 1.4rem;
+            }
+
+            /* Backdrop overlay */
+            .nav-links::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: all .3s ease;
+                z-index: -1;
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-links.open::before {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* Close button styling */
+            .menu-toggle.open span {
+                background: var(--accent);
             }
         }
 
@@ -1175,7 +1208,7 @@
                 <h1>Earn Your Screen Time Through Movement</h1>
                 <p>Moshen revolutionizes digital wellness by rewarding your physical activity with social media minutes. Walk, exercise, and stay active to unlock screen time - making fitness your key to staying connected.</p>
                 <div class="download-buttons">
-                    <a href="#" class="download-btn primary">
+                    <a href="https://apps.apple.com/us/app/moshen/id6746318174" class="download-btn primary">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                         </svg>
@@ -1259,7 +1292,7 @@
             <h2>Break Free From Screen Addiction</h2>
             <p>Join thousands who've found the perfect balance between staying connected and staying active. Your fitness journey becomes your ticket to digital freedom.</p>
             <div class="download-buttons">
-                <a href="#" class="download-btn primary">
+                <a href="https://apps.apple.com/us/app/moshen/id6746318174" class="download-btn primary">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                     </svg>
@@ -1338,17 +1371,44 @@
         /* hamburger toggle */
         const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        
+        function closeMenu() {
+            menuBtn.classList.remove('open');
+            navLinks.classList.remove('open');
+        }
+        
+        function openMenu() {
+            menuBtn.classList.add('open');
+            navLinks.classList.add('open');
+        }
+        
         menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            navLinks.classList.toggle('open');
+            if (navLinks.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
         /* close menu on link tap */
         navLinks.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-                menuBtn.classList.remove('open');
+                closeMenu();
             });
+        });
+
+        /* close menu on backdrop click */
+        navLinks.addEventListener('click', (e) => {
+            if (e.target === navLinks) {
+                closeMenu();
+            }
+        });
+
+        /* close menu on escape key */
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                closeMenu();
+            }
         });
 
         // Enhanced navbar scroll effect with smooth transitions
